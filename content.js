@@ -1,5 +1,49 @@
 (function()
  {
+  // =========================
+// FREEMIUM SETTINGS
+// =========================
+
+let extensionEnabled = true;
+
+// Load saved state
+chrome.storage.sync.get(
+  ['extensionEnabled'],
+  (result) => {
+
+    extensionEnabled =
+      result.extensionEnabled ?? true;
+
+    if (extensionEnabled) {
+      startFreemium();
+    }
+
+  }
+);
+
+// Listen for updates
+chrome.storage.onChanged.addListener(
+  (changes) => {
+
+    if (changes.extensionEnabled) {
+
+      extensionEnabled =
+        changes.extensionEnabled.newValue;
+
+      if (extensionEnabled) {
+        startFreemium();
+      }
+
+    }
+
+  }
+);
+
+// =========================
+// START MAIN SYSTEM
+// =========================
+
+function startFreemium() {
     // Enable The Undetected Adblocker
     const adblocker = true;
 
