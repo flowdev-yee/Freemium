@@ -3,25 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="index.css">
-  <title>YouTube AdBlocker</title>
+  <title>Freemium</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="popup-container">
-    <img src="icon.png" alt="Extension Icon" class="extension-icon" >
-    <h2>YouTube AdBlocker</h2>
-    <p>Block annoying ads on YouTube and enjoy an uninterrupted viewing experience.</p>
-    <div class="features">
-      <h2>Key Features:</h2>
-      <ul>
-        <li>Blocks video ads</li>
-        <li>Enhances video loading speed</li>
-        <li>Easy to use and customize</li>
-      </ul>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <img src="icon.png" class="logo" alt="Freemium Icon">
+      <h1>Freemium</h1>
+      <p class="subtitle">YouTube Downloader + Ad Control</p>
     </div>
-    <footer>
-      <h3>Created by <a href="https://linktr.ee/kanani_nirav" target="_blank">Kanani Nirav</a></h3>
-    </footer>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('downloader')">⬇️ Downloader</button>
+      <button class="tab-btn" onclick="switchTab('adblock')">🛑 Ad Blocker</button>
+      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- TAB: DOWNLOADER -->
+    <div id="downloader" class="tab-content active">
+
+      <div id="no-video" class="message">
+        <p>Open a YouTube video to start downloading.</p>
+        <button id="open-youtube" class="btn primary">Go to YouTube</button>
+      </div>
+
+      <div id="video-info" class="hidden">
+
+        <div class="thumbnail-container">
+          <img id="video-thumbnail" src="" alt="thumbnail">
+          <span id="video-duration" class="duration"></span>
+        </div>
+
+        <h2 id="video-title"></h2>
+        <p id="channel-name"></p>
+
+        <h3>⬇️ Video Quality</h3>
+        <div id="video-qualities" class="quality-options"></div>
+
+        <h3>🎧 Audio Only</h3>
+        <div id="audio-qualities" class="quality-options"></div>
+
+        <div id="download-progress" class="progress-container hidden">
+          <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+          </div>
+          <p id="progress-text">Preparing download...</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB: ADBLOCK -->
+    <div id="adblock" class="tab-content">
+
+      <h2>🛑 Ad Blocker Control</h2>
+
+      <div class="toggle-row">
+        <span>Enable Ad Blocking</span>
+        <label class="switch">
+          <input type="checkbox" id="adblock-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="adblock-info">
+        <ul>
+          <li>Blocks video ads</li>
+          <li>Removes overlays & popups</li>
+          <li>Improves playback speed</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- TAB: SETTINGS -->
+    <div id="settings" class="tab-content">
+
+      <h2>⚙️ Settings</h2>
+
+      <button id="settings-btn" class="btn secondary">Advanced Settings</button>
+
+      <p class="version">Freemium v1.0</p>
+
+    </div>
+
   </div>
+
+  <script src="popup.js"></script>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+
 </body>
 </html>
